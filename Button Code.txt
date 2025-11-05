@@ -1,0 +1,84 @@
+-- Student Enrollment Form Button
+
+DECLARE 
+	f number :=0;
+BEGIN
+		SELECT student_id into f FROM student_details
+		where STUDENT_ID = :STUDENT_ID;
+		f:=1;
+if f = 1
+then
+	MESSAGE('THE STUDENT ALREADY EXISTS');
+else
+    INSERT INTO student_details (
+                student_id, 
+                course_id, 
+                branch_id,
+                firstname, 
+                lastname,
+                phone_no1, 
+                phone_no2,
+                email, 
+                address
+            )
+            VALUES (
+                :STUDENT_ID,            
+                :COURSE_ID,      
+                :BRANCH_ID,              
+                :FIRSTNAME,              
+                :LASTNAME,
+                :PHONE_NO1,
+                :PHONE_NO2,
+                :EMAIL,
+                :ADDRESS              
+            );
+  END IF;
+            -- Commit the changes to the database
+            COMMIT;
+            -- Display success message for inserting the new student
+            MESSAGE('Student successfully added!');
+END;
+
+
+
+-- Employee Enrollment Form Button
+
+declare 
+	f number :=0;
+begin
+ 
+		SELECT 1 INTO f FROM Emp_tables 
+		where emp_id = :EMP_ID;
+	--	f:=1;
+ 
+if f = 1
+then
+	MESSAGE('THE EMPLOYEE ALREADY EXISTS');
+else
+  INSERT INTO Emp_tables (
+        		   emp_id, 
+                	   branch_id,
+                	   dept_id,
+                	   first_name, 
+                	   last_name,
+                	   designation, 
+                	   phone_no1,
+                	   email_id
+            			    )
+              VALUES (
+                	:EMP_ID,             
+                	:BRANCH_ID,
+                	:DEPT_ID,             
+                	:FIRST_NAME,              
+                	:LAST_NAME,
+                	:DESIGNATION,
+                	:PHONE_NO1,
+                	:EMAIL_ID             
+            			  );
+end if;
+ 
+            -- Commit the changes to the database
+      COMMIT;
+            -- Display success message for inserting the new student
+            MESSAGE('Student successfully added!');
+END;
